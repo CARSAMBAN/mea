@@ -1,149 +1,189 @@
 <!DOCTYPE html>
 <html lang="tr">
-  <script>
-  if (window.location.href.indexOf("instagram") !== -1) {
-    window.location.replace("https://carsamban.github.io/mea/");
-  }
-</script>
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Carsanban | Drone Çekimi</title>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Çarşamba Drone Çekimi | Profesyonel Hava Çekimleri</title>
 
+  <!-- SEO -->
+  <meta name="description" content="Samsun Çarşamba profesyonel drone çekimi. Arsa, konut, tanıtım ve sosyal medya için yüksek kaliteli hava çekimleri.">
+  <meta name="keywords" content="çarşamba drone çekimi, samsun drone, arsa drone çekimi">
 
-  <link rel="stylesheet" href="style.css" />
+  <!-- OpenGraph -->
+  <meta property="og:title" content="Çarşamba Drone Çekimi">
+  <meta property="og:description" content="Profesyonel drone çekim hizmetleri">
+  <meta property="og:type" content="website">
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Instagram tarayıcı yönlendirme -->
+  <script>
+    const ua = navigator.userAgent.toLowerCase();
+    if (ua.includes("instagram")) {
+      window.location.href = "https://carsamban.github.io/mea/";
+    }
+  </script>
 </head>
 <body>
 
 <!-- 🔝 NAVBAR -->
 <header class="navbar">
-  <div class="logo">CARSANBAN</div>
+  <div class="logo"><h3>CARSAMBAN</h3></div>
 
-  <div class="menu-toggle" id="menuToggle">
-    ☰
-  </div>
+  <div class="menu-toggle" id="menuToggle">☰</div>
 
   <nav id="navMenu">
     <a href="#anasayfa">Anasayfa</a>
     <a href="#hizmetler">Hizmetler</a>
     <a href="#isler">Yaptığımız İşler</a>
+    <a href="#teklif-formu">Teklif Al</a>
     <a href="#iletisim">İletişim</a>
-    <a href="#adres">Adresimiz</a>
   </nav>
 </header>
 
-
-<!-- 🎞️ HERO SLIDER -->
+<!-- 🎞️ HERO -->
 <section id="anasayfa" class="hero">
   <div class="hero-track">
-    <div class="hero-slide">
-      <img src="a.jpg" alt="Drone çekimi 1">
-    </div>
-    <div class="hero-slide">
-      <img src="b.jpg" alt="Drone çekimi 2">
-    </div>
-    <div class="hero-slide">
-      <img src="a.jpg" alt="Drone çekimi 3">
-    </div>
-
-    <!-- KOPYALAR (sonsuzluk için) -->
-    <div class="hero-slide">
-      <img src="a.jpg" alt="">
-    </div>
-    <div class="hero-slide">
-      <img src="b.jpg" alt="">
-    </div>
-    <div class="hero-slide">
-      <img src="a.jpg" alt="">
-    </div>
+    <div class="hero-slide"><img src="a.png" loading="lazy" alt="Drone Çekimi 1"></div>
+    <div class="hero-slide"><img src="b.jpg" loading="lazy" alt="Drone Çekimi 2"></div>
+    <div class="hero-slide"><img src="a.jpg" loading="lazy" alt="Drone Çekimi 3"></div>
+    <!-- kopyalar -->
+    <div class="hero-slide"><img src="a.jpg" alt="Drone Çekimi 4"></div>
+    <div class="hero-slide"><img src="b.jpg" alt="Drone Çekimi 5"></div>
+    <div class="hero-slide"><img src="a.jpg" alt="Drone Çekimi 6"></div>
   </div>
 
   <div class="hero-overlay">
     <h1>Profesyonel Drone Çekimi</h1>
-    <p>Arsa • Konut • Tanıtım • Sosyal Medya</p>
+    <p>Arsa • Konut • İşyeri • Sosyal Medya</p>
+    <a href="#teklif-formu" class="cta">Hemen Teklif Al</a>
   </div>
 </section>
 
-
-
-
-
-<!-- 🚁 HİZMETLER -->
-<section id="isler" class="section dark">
-  <h2>Yaptığımız İşler</h2>
+<!-- 🛠️ HİZMETLER -->
+<section id="hizmetler" class="section dark">
+  <h2>Hizmetlerimiz</h2>
+  <p class="section-text">
+    Samsun Çarşamba bölgesinde profesyonel drone çekimi hizmeti sunuyoruz.
+    Arsa, konut ve işletmeler için yüksek çözünürlüklü yenilikçi çekimlerle 
+    sosyal medyada kendinize fırsatlar yaratmanıza, portföylerinize profesyonel 
+    tanıtımlar hazırlıyoruz.
+  </p>
 
   <div class="cards">
-    <a href="arsa.html" class="card-link">
-      <div class="card">
-        Arsa Drone Çekimi
-      </div>
-    </a>
-
-    <a href="konut.html" class="card-link">
-      <div class="card">
-        Konut Tanıtımı
-      </div>
-    </a>
-
-    <a href="sosyal.html" class="card-link">
-      <div class="card">
-        Sosyal Medya
-      </div>
-    </a>
+    <div class="card">
+      <h3>Arsa Drone Çekimi</h3>
+      <p>Profesyonel arsa ve arazi çekimleri</p>
+    </div>
+    <div class="card">
+      <h3>Konut & Villa Tanıtımı</h3>
+      <p>Villa ve daire tanıtım videoları</p>
+    </div>
+    <div class="card">
+      <h3>Sosyal Medya Videoları</h3>
+      <p>Instagram ve TikTok içerikleri</p>
+    </div>
   </div>
 </section>
-
 
 <!-- 🎥 İŞLER -->
-<section id="isler" class="section dark">
-  <h2>Yaptığımız İşler</h2>
+<!-- index.html dosyasında "Yaptığımız İşler" bölümünü şöyle güncelle: -->
+<section id="isler" class="section">
+  <h2>Yaptığımız İşlere Göz At</h2>
+  <p class="section-text">
+    Daha önce yaptığımız çalışmaları video galerimizde izleyin ve kalitemizi görün.
+  </p>
 
   <div class="cards">
-    <div class="card">Arsa Drone Çekimi</div>
-    <div class="card">Konut Tanıtımı</div>
-    <div class="card">Sosyal Medya Videosu</div>
+    <a href="devam.html#arsa" class="card-link">
+      <div class="card">
+        <h3>Arsa Çekimleri</h3>
+        <p>Profesyonel arsa ve arazi çekimleri</p>
+        <div class="card-icon"></div>
+      </div>
+    </a>
+    <a href="devam.html#konut" class="card-link">
+      <div class="card">
+        <h3>Konut Tanıtımları</h3>
+        <p>Villa ve daire tanıtım videoları</p>
+        <div class="card-icon"></div>
+      </div>
+    </a>
+    <a href="devam.html#sosyal" class="card-link">
+      <div class="card">
+        <h3>Sosyal Medya</h3>
+        <p>Instagram ve TikTok içerikleri</p>
+        <div class="card-icon"></div>
+      </div>
+    </a>
   </div>
+  
+  <div style="text-align: center; margin-top: 40px;">
+    <a href="devam.html" class="cta" style="display: inline-flex; align-items: center; gap: 10px;">
+      🎬 Tüm Videoları İzle
+    </a>
+  </div>
+</section>
+
+<!-- 📝 TEKLİF FORMU -->
+<section id="teklif-formu" class="section dark">
+  <h2>WhatsApp'tan Teklif Al</h2>
+  <p class="section-text">
+    Hemen formu doldurun, size WhatsApp üzerinden en kısa sürede dönüş yapalım.
+  </p>
+
+  <form id="teklifForm" class="teklif-form">
+    <input type="text" id="ad" placeholder="Adınız Soyadınız" required>
+    <input type="tel" id="telefon" placeholder="Telefon Numaranız" required>
+    <select id="hizmet">
+      <option value="Arsa Drone Çekimi">Arsa Drone Çekimi</option>
+      <option value="Konut Tanıtımı">Konut Tanıtımı</option>
+      <option value="Sosyal Medya Videosu">Sosyal Medya Videosu</option>
+    </select>
+    <textarea id="mesaj" placeholder="Eklemek istedikleriniz"></textarea>
+    <button type="submit">WhatsApp'tan Teklif Al</button>
+  </form>
 </section>
 
 <!-- 📞 İLETİŞİM -->
 <section id="iletisim" class="section">
   <h2>İletişim</h2>
+  <p class="section-text">
+    Sosyal medya hesaplarımızdan bize ulaşabilir veya takip edebilirsiniz.
+  </p>
 
   <div class="social-buttons">
-    <a href="https://wa.me/905XXXXXXXXX" target="_blank" class="social whatsapp">
-      WhatsApp
+    <a href="https://wa.me/905417679111" class="social whatsapp" target="_blank">
+      <img src="whatsapp-logo.png" alt="WhatsApp" class="social-logo" loading="lazy">
+      <span class="social-text">WhatsApp'tan Yaz</span>
     </a>
-
-    <a href="https://instagram.com/kullaniciadi" target="_blank" class="social instagram">
-      Instagram
+    
+    <a href="https://instagram.com/carsamban" class="social instagram" target="_blank">
+      <img src="instagram-logo.png" alt="Instagram" class="social-logo" loading="lazy">
+      <span class="social-text">Instagram'da Takip Et</span>
     </a>
-
-    <a href="https://tiktok.com/@kullaniciadi" target="_blank" class="social tiktok">
-      TikTok
-    </a>
-
-    <a href="https://facebook.com/kullaniciadi" target="_blank" class="social facebook">
-      Facebook
+    
+    <a href="https://tiktok.com/@carsamban" class="social tiktok" target="_blank">
+      <img src="tiktok-logo.png" alt="TikTok" class="social-logo" loading="lazy">
+      <span class="social-text">TikTok'ta İzle</span>
     </a>
   </div>
 </section>
 
-<!-- 📲 SABİT WHATSAPP BUTONU -->
-<a href="https://wa.me/905XXXXXXXXX" class="fixed-whatsapp" target="_blank">
+<!-- 🏁 FOOTER -->
+<footer>
+  <div class="footer-content">
+    <p>© 2024 Carsamban. Tüm Hakları Saklıdır.</p>
+    <p>Profesyonel Drone Çekim Hizmetleri</p>
+    <p>2026@carsamban</p>
+  </div>
+</footer>
+
+<!-- 📲 SABİT WHATSAPP -->
+<a href="https://wa.me/905417679111" class="fixed-whatsapp" target="_blank">
   WhatsApp
 </a>
-
-
-<!-- 📍 ADRES -->
-<section id="adres" class="section dark">
-  <h2>Adresimiz</h2>
-  <p>Samsun / Çarşamba</p>
-</section>
 
 <script src="script.js"></script>
 </body>
 </html>
-
-
