@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Galerisi | Çarşamba Drone Çekimi</title>
+  
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Video Galerisi Özel Stilleri */
+    .video-gallery {
+      min-height: 100vh;
+      background: #0e0e0e;
+      padding: 80px 5%;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    .page-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    
+    .page-header h1 {
+      font-size: 3rem;
+      background: linear-gradient(135deg, #fff 0%, #25D366 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 20px;
+    }
+    
+    .page-header p {
+      color: #aaa;
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    /* Video Grid */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+    
+    /* Video Kartları */
+    .video-card {
+      background: #1a1a1a;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+    }
+    
+    .video-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      border-color: rgba(37, 211, 102, 0.3);
+      box-shadow: 0 15px 40px rgba(37, 211, 102, 0.15);
+    }
+    
+    .video-thumbnail {
+      position: relative;
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+    }
+    
+    .video-thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .video-card:hover .video-thumbnail img {
+      transform: scale(1.05);
+    }
+    
+    .play-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 60px;
+      background: rgba(37, 211, 102, 0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 24px;
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+    
+    .video-card:hover .play-button {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+    
+    .video-duration {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+    }
+    
+    .video-info {
+      padding: 20px;
+    }
+    
+    .video-info h3 {
+      color: #fff;
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    
+    .video-info p {
+      color: #aaa;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin-bottom: 15px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    
+    .video-meta {
+      display: flex;
+      justify-content: space-between;
+      color: #888;
+      font-size: 0.8rem;
+    }
+    
+    /* Video Modal */
+    .video-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    
+    .video-modal.active {
+      display: flex;
+      animation: fadeIn 0.3s ease-out;
+    }
+    
+    .modal-content {
+      width: 100%;
+      max-width: 900px;
+      background: #1a1a1a;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      animation: slideUp 0.4s ease-out;
+    }
+    
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      background: #252525;
+      border-bottom: 1px solid #333;
+    }
+    
+    .modal-header h2 {
+      color: #fff;
+      font-size: 1.5rem;
+      margin: 0;
+    }
+    
+    .close-modal {
+      background: none;
+      border: none;
+      color: #aaa;
+      font-size: 24px;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+    
+    .close-modal:hover {
+      background: #333;
+      color: #fff;
+    }
+    
+    .video-player {
+      width: 100%;
+      padding: 20px;
+      background: #000;
+    }
+    
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 aspect ratio */
+      height: 0;
+      overflow: hidden;
+    }
+    
+    .video-container iframe,
+    .video-container video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    
+    .modal-body {
+      padding: 20px;
+    }
+    
+    .modal-body h3 {
+      color: #fff;
+      margin-bottom: 15px;
+    }
+    
+    .modal-body p {
+      color: #aaa;
+      line-height: 1.6;
+    }
+    
+    /* Video Kategorileri */
+    .video-categories {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    .category-btn {
+      padding: 10px 20px;
+      background: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 50px;
+      color: #ccc;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .category-btn.active,
+    .category-btn:hover {
+      background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+      color: #000;
+      border-color: transparent;
+    }
+    
+    /* Back Button */
+    .back-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 25px;
+      background: #1a1a1a;
+      color: #ccc;
+      text-decoration: none;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      margin-top: 30px;
+      border: 1px solid #333;
+    }
+    
+    .back-home:hover {
+      background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+      color: #000;
+      transform: translateY(-3px);
+    }
+    
+    /* Responsive Tasarım */
+    @media (max-width: 768px) {
+      .video-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 20px;
+      }
+      
+      .page-header h1 {
+        font-size: 2.2rem;
+      }
+      
+      .modal-content {
+        margin: 10px;
+      }
+      
+      .video-thumbnail {
+        height: 180px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .video-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .page-header h1 {
+        font-size: 1.8rem;
+      }
+      
+      .video-categories {
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 10px;
+      }
+      
+      .video-thumbnail {
+        height: 160px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- 🔝 NAVBAR -->
+<header class="navbar">
+  <div class="logo"><h3>CARSAMBAN</h3></div>
+  <div class="menu-toggle" id="menuToggle">☰</div>
+  <nav id="navMenu">
+    <a href="index.html">Ana Sayfa</a>
+    <a href="index.html#hizmetler">Hizmetler</a>
+    <a href="#video-galeri">Videolar</a>
+    <a href="index.html#teklif-formu">Teklif Al</a>
+    <a href="index.html#iletisim">İletişim</a>
+  </nav>
+</header>
+
+<!-- 🎥 VİDEO GALERİSİ -->
+<main class="video-gallery" id="video-galeri">
+  <div class="page-header">
+    <h1>Video Galerisi</h1>
+    <p>Profesyonel drone çekimlerimizden en iyi örnekleri burada bulabilirsiniz</p>
+  </div>
+  
+  <!-- Video Kategorileri -->
+  <div class="video-categories">
+    <button class="category-btn active" data-category="all">Tüm Videolar</button>
+    <button class="category-btn" data-category="arsa">Arsa Çekimleri</button>
+    <button class="category-btn" data-category="konut">Konut Tanıtımları</button>
+    <button class="category-btn" data-category="sosyal">Sosyal Medya</button>
+    <button class="category-btn" data-category="tanitim">Tanıtım Videoları</button>
+  </div>
+  
+  <!-- Video Grid -->
+  <div class="video-grid" id="videoContainer">
+    <!-- Videolar buraya eklenecek -->
+  </div>
+  
+  <!-- Back to Home -->
+  <div style="text-align: center;">
+    <a href="index.html" class="back-home">
+      ← Ana Sayfaya Dön
+    </a>
+  </div>
+</main>
+
+<!-- 🎬 VİDEO MODAL -->
+<div class="video-modal" id="videoModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 id="modalTitle">Video Başlığı</h2>
+      <button class="close-modal" id="closeModal">&times;</button>
+    </div>
+    
+    <div class="video-player">
+      <div class="video-container">
+        <!-- Video buraya yüklenecek -->
+      </div>
+    </div>
+    
+    <div class="modal-body">
+      <h3 id="modalDescription">Video Açıklaması</h3>
+      <p id="modalDetails">Video detayları burada yer alacak...</p>
+    </div>
+  </div>
+</div>
+
+<!-- 📲 SABİT WHATSAPP -->
+<a href="https://wa.me/905417679111" class="fixed-whatsapp" target="_blank">WhatsApp</a>
+
+<script>
+  // Video Verileri
+  const videos = [
+    {
+      id: 1,
+      title: "Çarşamba'da Profesyonel Arsa Çekimi",
+      description: "Samsun Çarşamba'da gerçekleştirdiğimiz profesyonel arsa drone çekimi.",
+      category: "arsa",
+      duration: "2:45",
+      views: "1.2K",
+      date: "2 hafta önce",
+      thumbnail: "https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?w=800&auto=format&fit=crop",
+      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ" // Örnek YouTube URL
+    },
+    {
+      id: 2,
+      title: "Lüks Villa Tanıtım Videosu",
+      description: "Müstakil villa için hazırladığımız tanıtım ve tur videosu.",
+      category: "konut",
+      duration: "3:20",
+      views: "2.8K",
+      date: "1 ay önce",
+      thumbnail: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w-800&auto=format&fit=crop",
+      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ"
+    },
+    {
+      id: 3,
+      title: "Instagram Reels İçin Drone Çekimi",
+      description: "Sosyal medya için hazırlanmış kısa ve etkileyici drone çekimi.",
+      category: "sosyal",
+      duration: "0:45",
+      views: "5.4K",
+      date: "3 gün önce",
+      thumbnail: "https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?w=800&auto=format&fit=crop",
+      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ"
+    },
+    {
+      id: 4,
+      title: "İşyeri Tanıtım Filmimiz",
+      description: "Bir fabrikanın tanıtımı için hazırladığımız profesyonel çekim.",
+      category: "tanitim",
+      duration: "4:15",
+      views: "890",
+      date: "2 ay önce",
+      thumbnail: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=800&auto=format&fit=crop",
+      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ"
+    },
+    {
+      id: 5,
+      title: "Tarım Arazisi Drone Çekimi",
+      description: "Geniş tarım arazisinin havadan çekimi ve analizi.",
+      category: "arsa",
+      duration: "3:05",
+      views: "1.5K",
+      date: "1 hafta önce",
+      thumbnail: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&auto=format&fit=crop",
+      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ"
+    },
+    {
+      id: 6,
+      title: "Site ve Çevre Tanıtımı",
+      description: "Yeni yapılan sitenin çevresiyle birlikte tanıtım videosu.",
+      category: "konut",
+      duration: "2:30",
+      views: "3.2K",
+      date: "3 hafta önce",
+      thumbnail: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&auto=format&fit=crop",
+      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ"
+    }
+  ];
+
+  // DOM Elements
+  const videoContainer = document.getElementById('videoContainer');
+  const videoModal = document.getElementById('videoModal');
+  const closeModal = document.getElementById('closeModal');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalDescription = document.getElementById('modalDescription');
+  const modalDetails = document.getElementById('modalDetails');
+  const videoContainerElement = document.querySelector('.video-container');
+  const categoryButtons = document.querySelectorAll('.category-btn');
+
+  // Videoları Render Et
+  function renderVideos(filterCategory = 'all') {
+    videoContainer.innerHTML = '';
+    
+    const filteredVideos = filterCategory === 'all' 
+      ? videos 
+      : videos.filter(video => video.category === filterCategory);
+    
+    filteredVideos.forEach(video => {
+      const videoCard = document.createElement('div');
+      videoCard.className = 'video-card';
+      videoCard.dataset.category = video.category;
+      videoCard.innerHTML = `
+        <div class="video-thumbnail">
+          <img src="${video.thumbnail}" alt="${video.title}" loading="lazy">
+          <div class="play-button">▶</div>
+          <div class="video-duration">${video.duration}</div>
+        </div>
+        <div class="video-info">
+          <h3>${video.title}</h3>
+          <p>${video.description}</p>
+          <div class="video-meta">
+            <span>👁️ ${video.views} görüntülenme</span>
+            <span>📅 ${video.date}</span>
+          </div>
+        </div>
+      `;
+      
+      videoCard.addEventListener('click', () => openVideoModal(video));
+      videoContainer.appendChild(videoCard);
+    });
+  }
+
+  // Video Modalını Aç
+  function openVideoModal(video) {
+    modalTitle.textContent = video.title;
+    modalDescription.textContent = video.description;
+    modalDetails.innerHTML = `
+      <strong>Kategori:</strong> ${getCategoryName(video.category)}<br>
+      <strong>Süre:</strong> ${video.duration}<br>
+      <strong>Görüntülenme:</strong> ${video.views}<br>
+      <strong>Yayın Tarihi:</strong> ${video.date}
+    `;
+    
+    videoContainerElement.innerHTML = `
+      <iframe 
+        src="${video.videoUrl}?autoplay=1&rel=0" 
+        title="${video.title}"
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+      </iframe>
+    `;
+    
+    videoModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  // Kategori İsimlerini Getir
+  function getCategoryName(category) {
+    const categories = {
+      'arsa': 'Arsa Çekimleri',
+      'konut': 'Konut Tanıtımları',
+      'sosyal': 'Sosyal Medya',
+      'tanitim': 'Tanıtım Videoları'
+    };
+    return categories[category] || category;
+  }
+
+  // Kategori Filtreleme
+  categoryButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      // Aktif butonu güncelle
+      categoryButtons.forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+      
+      // Videoları filtrele
+      const category = button.dataset.category;
+      renderVideos(category);
+    });
+  });
+
+  // Modalı Kapat
+  closeModal.addEventListener('click', () => {
+    videoModal.classList.remove('active');
+    document.body.style.overflow = 'auto';
+    // Videoyu durdur
+    videoContainerElement.innerHTML = '';
+  });
+
+  // Modal dışına tıklayınca kapat
+  videoModal.addEventListener('click', (e) => {
+    if (e.target === videoModal) {
+      videoModal.classList.remove('active');
+      document.body.style.overflow = 'auto';
+      videoContainerElement.innerHTML = '';
+    }
+  });
+
+  // ESC tuşu ile kapat
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && videoModal.classList.contains('active')) {
+      videoModal.classList.remove('active');
+      document.body.style.overflow = 'auto';
+      videoContainerElement.innerHTML = '';
+    }
+  });
+
+  // Başlangıçta videoları render et
+  renderVideos();
+
+  // Navbar için mevcut script
+  const navbar = document.querySelector('.navbar');
+  const menuToggle = document.getElementById("menuToggle");
+  const navMenu = document.getElementById("navMenu");
+  const navLinks = document.querySelectorAll("#navMenu a");
+
+  // Navbar scroll efekti
+  let lastScroll = 0;
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+    
+    if (currentScroll > 50) {
+      navbar.classList.add('scrolled');
+      
+      if (currentScroll > lastScroll && currentScroll > 200) {
+        navbar.style.transform = 'translateY(-100%)';
+        navbar.style.transition = 'transform 0.3s ease';
+      } else {
+        navbar.style.transform = 'translateY(0)';
+      }
+    } else {
+      navbar.classList.remove('scrolled');
+      navbar.style.transform = 'translateY(0)';
+    }
+    
+    lastScroll = currentScroll;
+  });
+
+  // Mobile menu toggle
+  menuToggle.addEventListener("click", () => {
+    navMenu.classList.toggle("active");
+    menuToggle.classList.toggle("active");
+    document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+  });
+
+  // Menüden linke tıklayınca kapat
+  navLinks.forEach(link => {
+    link.addEventListener("click", () => {
+      navMenu.classList.remove("active");
+      menuToggle.classList.remove("active");
+      document.body.style.overflow = '';
+    });
+  });
+</script>
+</body>
+</html>
