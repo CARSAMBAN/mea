@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Çarşamba Drone Çekimi | Profesyonel Hava Çekimleri</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Samsun Çarşamba profesyonel drone çekimi. Arsa, konut, tanıtım ve sosyal medya için yüksek kaliteli hava çekimleri.">
+  <meta name="keywords" content="çarşamba drone çekimi, samsun drone, arsa drone çekimi">
+
+  <!-- OpenGraph -->
+  <meta property="og:title" content="Çarşamba Drone Çekimi">
+  <meta property="og:description" content="Profesyonel drone çekim hizmetleri">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="a.png">
+  <meta property="og:url" content="https://carsamban.github.io">
+
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Basit Slider CSS (Instagram için) -->
+  <style>
+    /* Instagram tarayıcısı için basit slider */
+    .simple-slider {
+      display: none;
+    }
+    
+    @media only screen and (max-width: 768px) {
+      .hero-track {
+        display: none;
+      }
+      
+      .simple-slider {
+        display: flex;
+        width: 300vw;
+        height: 100vh;
+        position: relative;
+      }
+      
+      .simple-slide {
+        width: 100vw;
+        height: 100%;
+        flex-shrink: 0;
+      }
+      
+      .simple-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(60%);
+      }
+    }
+  </style>
+  
+  <!-- Instagram/Facebook tarayıcı tespiti -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const ua = navigator.userAgent.toLowerCase();
+      const isInstagram = ua.includes("instagram");
+      const isFacebook = ua.includes("fban") || ua.includes("fbav");
+      
+      if (isInstagram || isFacebook) {
+        document.body.classList.add('instagram-browser');
+        
+        // Instagram'da complex slider'ı kapat, simple slider'ı aç
+        const heroTrack = document.querySelector('.hero-track');
+        const simpleSlider = document.querySelector('.simple-slider');
+        
+        if (heroTrack) heroTrack.style.display = 'none';
+        if (simpleSlider) simpleSlider.style.display = 'flex';
+        
+        // JavaScript ile basit slider
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.simple-slide');
+        
+        if (slides.length > 0) {
+          setInterval(() => {
+            currentSlide = (currentSlide + 1) % slides.length;
+            simpleSlider.style.transform = `translateX(-${currentSlide * 100}vw)`;
+            simpleSlider.style.transition = 'transform 1s ease';
+          }, 4000);
+        }
+      }
+    });
+  </script>
+</head>
+<body>
+
+<!-- 🔝 NAVBAR -->
+<header class="navbar">
+  <div class="logo"><h3>CARSAMBAN</h3></div>
+
+  <div class="menu-toggle" id="menuToggle">☰</div>
+
+  <nav id="navMenu">
+    <a href="#anasayfa">Anasayfa</a>
+    <a href="#hizmetler">Hizmetler</a>
+    <a href="devam.html">Videolar</a>
+    <a href="#teklif-formu">Teklif Al</a>
+    <a href="#iletisim">İletişim</a>
+  </nav>
+</header>
+
+<!-- 🎞️ HERO (Normal Slider) -->
+<section id="anasayfa" class="hero">
+  <div class="hero-track">
+    <div class="hero-slide"><img src="a.jpg" loading="lazy" alt="Drone Çekimi 1"></div>
+    <div class="hero-slide"><img src="b.jpg" loading="lazy" alt="Drone Çekimi 2"></div>
+    <div class="hero-slide"><img src="c.jpg" loading="lazy" alt="Drone Çekimi 3"></div>
+    <!-- kopyalar -->
+    <div class="hero-slide"><img src="a.jpg" alt="Drone Çekimi 4"></div>
+    <div class="hero-slide"><img src="b.jpg" alt="Drone Çekimi 5"></div>
+    <div class="hero-slide"><img src="c.jpg" alt="Drone Çekimi 6"></div>
+  </div>
+  
+  <!-- Basit Slider (Mobil/Instagram için) -->
+  <div class="simple-slider">
+    <div class="simple-slide"><img src="a.jpg" loading="lazy" alt="Drone Çekimi 1"></div>
+    <div class="simple-slide"><img src="b.jpg" loading="lazy" alt="Drone Çekimi 2"></div>
+    <div class="simple-slide"><img src="c.jpg" loading="lazy" alt="Drone Çekimi 3"></div>
+  </div>
+
+  <div class="hero-overlay">
+    <h1>Profesyonel Drone Çekimi</h1>
+    <p>Arsa • Konut • İşyeri • Sosyal Medya</p>
+    <a href="#teklif-formu" class="cta">Hemen Teklif Al</a>
+  </div>
+</section>
+
+<!-- 🛠️ HİZMETLER -->
+<section id="hizmetler" class="section dark">
+  <h2>Hizmetlerimiz</h2>
+  <p class="section-text">
+    Samsun Çarşamba bölgesinde profesyonel drone çekimi hizmeti sunuyoruz.
+    Arsa, konut ve işletmeler için yüksek çözünürlüklü yenilikçi çekimlerle 
+    sosyal medyada kendinize fırsatlar yaratmanıza, portföylerinize profesyonel 
+    tanıtımlar hazırlıyoruz.
+  </p>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-icon">🏞️</div>
+      <h3>Arsa Drone Çekimi</h3>
+      <p>Profesyonel arsa ve arazi çekimleri</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🏠</div>
+      <h3>Konut & Villa Tanıtımı</h3>
+      <p>Villa ve daire tanıtım videoları</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📱</div>
+      <h3>Sosyal Medya Videoları</h3>
+      <p>Instagram ve TikTok içerikleri</p>
+    </div>
+  </div>
+</section>
+
+<!-- 🎥 VİDEO GALERİSİ -->
+<section id="isler" class="section">
+  <h2>Video Galerimiz</h2>
+  <p class="section-text">
+    Daha önce yaptığımız çalışmaları video galerimizde izleyin ve kalitemizi görün.
+  </p>
+
+  <div class="cards">
+    <a href="devam.html" class="card-link">
+      <div class="card">
+        <div class="card-icon">📹</div>
+        <h3>Arsa Çekimleri</h3>
+        <p>Profesyonel arsa çekimleri</p>
+      </div>
+    </a>
+    <a href="devam.html" class="card-link">
+      <div class="card">
+        <div class="card-icon">🎬</div>
+        <h3>Konut Tanıtımları</h3>
+        <p>Villa ve daire tanıtım videoları</p>
+      </div>
+    </a>
+    <a href="devam.html" class="card-link">
+      <div class="card">
+        <div class="card-icon">🔥</div>
+        <h3>Sosyal Medya</h3>
+        <p>Instagram ve TikTok içerikleri</p>
+      </div>
+    </a>
+  </div>
+  
+  <div style="text-align: center; margin-top: 40px;">
+    <a href="devam.html" class="cta" style="display: inline-flex; align-items: center; gap: 10px;">
+      🎬 Tüm Videoları İzle
+    </a>
+  </div>
+</section>
+
+<!-- 📝 TEKLİF FORMU -->
+<section id="teklif-formu" class="section dark">
+  <h2>WhatsApp'tan Teklif Al</h2>
+  <p class="section-text">
+    Hemen formu doldurun, size WhatsApp üzerinden en kısa sürede dönüş yapalım.
+  </p>
+
+  <form id="teklifForm" class="teklif-form">
+    <input type="text" id="ad" placeholder="Adınız Soyadınız" required>
+    <input type="tel" id="telefon" placeholder="Telefon Numaranız" required>
+    <select id="hizmet">
+      <option value="Arsa Drone Çekimi">Arsa Drone Çekimi</option>
+      <option value="Konut Tanıtımı">Konut Tanıtımı</option>
+      <option value="Sosyal Medya Videosu">Sosyal Medya Videosu</option>
+    </select>
+    <textarea id="mesaj" placeholder="Eklemek istedikleriniz"></textarea>
+    <button type="submit">WhatsApp'tan Teklif Al</button>
+  </form>
+</section>
+
+<!-- 📞 İLETİŞİM -->
+<section id="iletisim" class="section">
+  <h2>İletişim</h2>
+  <p class="section-text">
+    Sosyal medya hesaplarımızdan bize ulaşabilir veya takip edebilirsiniz.
+  </p>
+
+  <div class="social-buttons">
+    <a href="https://wa.me/905417679111" class="social whatsapp" target="_blank">
+      <img src="whatsapp-logo.png" alt="WhatsApp" class="social-logo" loading="lazy">
+      <span class="social-text">WhatsApp'tan Yaz</span>
+    </a>
+    
+    <a href="https://instagram.com/carsamban" class="social instagram" target="_blank">
+      <img src="instagram-logo.png" alt="Instagram" class="social-logo" loading="lazy">
+      <span class="social-text">Instagram'da Takip Et</span>
+    </a>
+    
+    <a href="https://tiktok.com/@carsamban" class="social tiktok" target="_blank">
+      <img src="tiktok-logo.png" alt="TikTok" class="social-logo" loading="lazy">
+      <span class="social-text">TikTok'ta İzle</span>
+    </a>
+  </div>
+</section>
+
+<!-- 🏁 FOOTER -->
+<footer>
+  <div class="footer-content">
+    <p>© 2026 Carsamban. Tüm Hakları Saklıdır.</p>
+    <p>Profesyonel Drone Çekim Hizmetleri</p>
+    <p>@carsamban</p>
+  </div>
+</footer>
+
+<!-- 📲 SABİT WHATSAPP -->
+<a href="https://wa.me/905417679111" class="fixed-whatsapp" target="_blank">
+  <img src="whatsapp-logo.png" alt="WhatsApp" style="width: 20px; height: 20px; filter: brightness(0) invert(0);">
+  WhatsApp
+</a>
+
+<script src="script.js" defer></script>
+</body>
+</html>
