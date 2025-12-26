@@ -13,15 +13,95 @@
   <meta property="og:title" content="Çarşamba Drone Çekimi">
   <meta property="og:description" content="Profesyonel drone çekim hizmetleri">
   <meta property="og:type" content="website">
+  <meta property="og:image" content="a.png">
+  <meta property="og:url" content="https://carsamban.github.io">
 
   <link rel="stylesheet" href="style.css">
-
-  <!-- Instagram tarayıcı yönlendirme -->
-  <script>
-    const ua = navigator.userAgent.toLowerCase();
-    if (ua.includes("instagram")) {
-      window.location.href = "https://carsamban.github.io/mea/";
+  
+  <!-- Instagram Fix CSS -->
+  <style>
+    /* Instagram tarayıcısı için özel fix'ler */
+    @media only screen and (max-width: 768px) {
+      /* Instagram'da backdrop-filter çalışmıyor */
+      .navbar,
+      nav {
+        background: rgba(0, 0, 0, 0.98) !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+      }
+      
+      /* Instagram'da animation sorunları */
+      .hero-track {
+        animation: heroScroll 20s linear infinite;
+      }
+      
+      /* Instagram'da hover efektleri kısıtlanıyor */
+      .instagram-browser .card:hover,
+      .instagram-browser .social:hover,
+      .instagram-browser .cta:hover {
+        transform: none !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+      }
     }
+    
+    /* Instagram sınıfı eklendiğinde */
+    .instagram-browser .navbar,
+    .instagram-browser nav {
+      background: rgba(0, 0, 0, 0.98) !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
+    
+    .instagram-browser .hero-track {
+      animation: heroScroll 20s linear infinite;
+    }
+    
+    /* Instagram için daha basit animasyonlar */
+    .instagram-browser .card,
+    .instagram-browser .social,
+    .instagram-browser .cta {
+      animation: none !important;
+    }
+    
+    .instagram-browser .social-logo {
+      animation: none !important;
+    }
+  </style>
+  
+  <!-- Instagram/Facebook tarayıcı tespiti -->
+  <script>
+    // Sayfa yüklendiğinde kontrol et
+    document.addEventListener('DOMContentLoaded', function() {
+      const ua = navigator.userAgent.toLowerCase();
+      const isInstagram = ua.includes("instagram");
+      const isFacebook = ua.includes("fban") || ua.includes("fbav");
+      
+      if (isInstagram || isFacebook) {
+        // Instagram/Facebook tarayıcısı tespit edildi
+        document.body.classList.add('instagram-browser');
+        
+        // Blur efektlerini kaldır
+        const style = document.createElement('style');
+        style.textContent = `
+          .navbar, nav {
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+          }
+          .card:hover, .social:hover, .cta:hover {
+            transform: none !important;
+          }
+        `;
+        document.head.appendChild(style);
+        
+        console.log('Instagram/Facebook tarayıcısı tespit edildi, basit mod aktif.');
+      }
+      
+      // Mevcut Instagram yönlendirmesi (isteğe bağlı)
+      // if (isInstagram) {
+      //   // Eğer basit bir sayfaya yönlendirmek istersen:
+      //   // window.location.href = "instagram-simple.html";
+      // }
+    });
   </script>
 </head>
 <body>
@@ -35,7 +115,7 @@
   <nav id="navMenu">
     <a href="#anasayfa">Anasayfa</a>
     <a href="#hizmetler">Hizmetler</a>
-    <a href="#isler">Yaptığımız İşler</a>
+    <a href="videolar.html">Videolar</a>
     <a href="#teklif-formu">Teklif Al</a>
     <a href="#iletisim">İletişim</a>
   </nav>
@@ -48,7 +128,7 @@
     <div class="hero-slide"><img src="b.jpg" loading="lazy" alt="Drone Çekimi 2"></div>
     <div class="hero-slide"><img src="a.jpg" loading="lazy" alt="Drone Çekimi 3"></div>
     <!-- kopyalar -->
-    <div class="hero-slide"><img src="a.jpg" alt="Drone Çekimi 4"></div>
+    <div class="hero-slide"><img src="a.png" alt="Drone Çekimi 4"></div>
     <div class="hero-slide"><img src="b.jpg" alt="Drone Çekimi 5"></div>
     <div class="hero-slide"><img src="a.jpg" alt="Drone Çekimi 6"></div>
   </div>
@@ -72,54 +152,56 @@
 
   <div class="cards">
     <div class="card">
+      <div class="card-icon">🏞️</div>
       <h3>Arsa Drone Çekimi</h3>
       <p>Profesyonel arsa ve arazi çekimleri</p>
     </div>
     <div class="card">
+      <div class="card-icon">🏠</div>
       <h3>Konut & Villa Tanıtımı</h3>
       <p>Villa ve daire tanıtım videoları</p>
     </div>
     <div class="card">
+      <div class="card-icon">📱</div>
       <h3>Sosyal Medya Videoları</h3>
       <p>Instagram ve TikTok içerikleri</p>
     </div>
   </div>
 </section>
 
-<!-- 🎥 İŞLER -->
-<!-- index.html dosyasında "Yaptığımız İşler" bölümünü şöyle güncelle: -->
+<!-- 🎥 VİDEO GALERİSİ -->
 <section id="isler" class="section">
-  <h2>Yaptığımız İşlere Göz At</h2>
+  <h2>Video Galerimiz</h2>
   <p class="section-text">
     Daha önce yaptığımız çalışmaları video galerimizde izleyin ve kalitemizi görün.
   </p>
 
   <div class="cards">
-    <a href="devam.html#arsa" class="card-link">
+    <a href="videolar.html#arsa" class="card-link">
       <div class="card">
+        <div class="card-icon">📹</div>
         <h3>Arsa Çekimleri</h3>
         <p>Profesyonel arsa ve arazi çekimleri</p>
-        <div class="card-icon"></div>
       </div>
     </a>
-    <a href="devam.html#konut" class="card-link">
+    <a href="videolar.html#konut" class="card-link">
       <div class="card">
+        <div class="card-icon">🎬</div>
         <h3>Konut Tanıtımları</h3>
         <p>Villa ve daire tanıtım videoları</p>
-        <div class="card-icon"></div>
       </div>
     </a>
-    <a href="devam.html#sosyal" class="card-link">
+    <a href="videolar.html#sosyal" class="card-link">
       <div class="card">
+        <div class="card-icon">🔥</div>
         <h3>Sosyal Medya</h3>
         <p>Instagram ve TikTok içerikleri</p>
-        <div class="card-icon"></div>
       </div>
     </a>
   </div>
   
   <div style="text-align: center; margin-top: 40px;">
-    <a href="devam.html" class="cta" style="display: inline-flex; align-items: center; gap: 10px;">
+    <a href="videolar.html" class="cta" style="display: inline-flex; align-items: center; gap: 10px;">
       🎬 Tüm Videoları İzle
     </a>
   </div>
@@ -175,15 +257,57 @@
   <div class="footer-content">
     <p>© 2024 Carsamban. Tüm Hakları Saklıdır.</p>
     <p>Profesyonel Drone Çekim Hizmetleri</p>
-    <p>2026@carsamban</p>
+    <p>carsamban@gmail.com</p>
   </div>
 </footer>
 
 <!-- 📲 SABİT WHATSAPP -->
 <a href="https://wa.me/905417679111" class="fixed-whatsapp" target="_blank">
+  <img src="whatsapp.png" alt="WhatsApp" style="width: 20px; height: 20px; filter: brightness(0) invert(0);">
   WhatsApp
 </a>
 
 <script src="script.js"></script>
+
+<!-- Instagram için ek script -->
+<script>
+  // Instagram'da dış linkleri yeni sekmede aç
+  document.addEventListener('DOMContentLoaded', function() {
+    const isInstagram = navigator.userAgent.toLowerCase().includes("instagram");
+    const isFacebook = navigator.userAgent.toLowerCase().includes("fban") || 
+                      navigator.userAgent.toLowerCase().includes("fbav");
+    
+    if (isInstagram || isFacebook) {
+      // Instagram/Facebook'ta target="_blank" linkleri için
+      document.querySelectorAll('a[target="_blank"]').forEach(link => {
+        link.addEventListener('click', function(e) {
+          // Instagram'da yeni sekme açmak için
+          window.open(this.href, '_blank');
+          e.preventDefault();
+        });
+      });
+      
+      // Form submit'i için
+      const form = document.getElementById('teklifForm');
+      if (form) {
+        form.addEventListener('submit', function(e) {
+          // Instagram'da form gönderimini kontrol et
+          if (isInstagram || isFacebook) {
+            e.preventDefault();
+            const ad = document.getElementById('ad').value;
+            const tel = document.getElementById('telefon').value;
+            const hizmet = document.getElementById('hizmet').value;
+            const mesaj = document.getElementById('mesaj').value;
+            
+            const whatsappMesaj = `Merhaba, teklif almak istiyorum.%0A%0A👤 Ad: ${ad}%0A📞 Tel: ${tel}%0A🎥 Hizmet: ${hizmet}%0A📝 Not: ${mesaj || 'Yok'}`;
+            
+            // WhatsApp linkini yeni sekmede aç
+            window.open(`https://wa.me/905417679111?text=${whatsappMesaj}`, '_blank');
+          }
+        });
+      }
+    }
+  });
+</script>
 </body>
 </html>
